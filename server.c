@@ -28,7 +28,7 @@ void send_to_device(const char *device_id, const char *msg) {
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i].fd > 0 && clients[i].is_device && strcmp(clients[i].id, device_id) == 0) {
             send(clients[i].fd, msg, strlen(msg), 0);
-            printf("Forwarded to device %s: %s", device_id, msg);
+            printf("Forwarded to %s: %s", device_id, msg);
             return;
         }
     }
@@ -41,7 +41,6 @@ void broadcast_to_clients(const char *msg) {
             send(clients[i].fd, msg, strlen(msg), 0);
         }
     }
-    printf("Broadcasted status to clients: %s", msg);
 }
 
 int main() {
@@ -94,7 +93,6 @@ int main() {
                     memset(&clients[fd], 0, sizeof(client_t));
                 } else {
                     buffer[bytes] = '\0';
-                    printf("Received: %s", buffer);
 
                     // Parse incoming message format
                     if (strncmp(buffer, "REGISTER_DEVICE:", 16) == 0) {
@@ -105,11 +103,20 @@ int main() {
                         clients[fd].is_device = 0;
                         printf("Registered web client bridge\n");
                     } else if (strncmp(buffer, "CMD:", 4) == 0) {
-                        char device[50], action[50];
-                        if (sscanf(buffer, "CMD:%49[^:]:%49s", device, action) == 2) {
+                        char username[50], device[50], action[50];
+                        // format: CMD:username:device:action
+                        if (sscanf(buffer, "CMD:%49[^:]:%49[^:]:%49s", username, device, action) == 3) {
+                            printf("User '%s' commanded '%s' to turn %s\n", username, device, action);
+                            
+                            // 1. Send command strictly to the device
                             char msg[128];
                             snprintf(msg, sizeof(msg), "CMD:%s:%s\n", device, action);
                             send_to_device(device, msg);
+                            
+                            // 2. Broadcast system message so all web users know WHO fired the command
+                            char sys_msg[128];
+                            snprintf(sys_msg, sizeof(sys_msg), "SYS:User %s commanded %s to %s\n", username, device, action);
+                            broadcast_to_clients(sys_msg);
                         }
                     } else if (strncmp(buffer, "STATUS:", 7) == 0) {
                         broadcast_to_clients(buffer);

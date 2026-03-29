@@ -1,8 +1,10 @@
 import socket
 import time
 import threading
+import sys
 
-DEVICE_ID = "fan1"
+# Allow launching multiple distinct devices e.g. `python device.py light1`
+DEVICE_ID = sys.argv[1] if len(sys.argv) > 1 else "fan1"
 HOST = "127.0.0.1"
 PORT = 9000
 

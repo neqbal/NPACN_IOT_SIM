@@ -12,9 +12,10 @@
         .device-card {
             border: 1px solid #ccc;
             padding: 15px;
-            width: 300px;
+            width: 350px;
             border-radius: 5px;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         button {
@@ -23,6 +24,14 @@
             cursor: pointer;
             border-radius: 3px;
             border: 1px solid #888;
+        }
+
+        .btn-on {
+            background: #d4edda;
+        }
+
+        .btn-off {
+            background: #f8d7da;
         }
 
         .log-container {
@@ -34,10 +43,16 @@
             white-space: pre-wrap;
             background: #f9f9f9;
             padding: 10px;
-            height: 150px;
+            height: 180px;
             overflow-y: scroll;
             border: 1px inset #ccc;
             font-family: monospace;
+        }
+
+        .title-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
         }
     </style>
 </head>
@@ -45,32 +60,50 @@
 <body>
 
     <div class="device-card">
-        <h2>Smart Home Control</h2>
-        <p>Device: <strong>fan1</strong></p>
-        <button onclick="sendCommand('ON')">Turn ON Fan</button>
-        <button onclick="sendCommand('OFF')">Turn OFF Fan</button>
+        <div class="title-bar">
+            <h2>Smart Home</h2>
+            <small>Logged in as: <strong id="userDisplay">...</strong></small>
+        </div>
+
+        <div style="margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 15px;">
+            <p>Device: <strong>fan1</strong></p>
+            <button class="btn-on" onclick="sendCommand('fan1', 'ON')">Turn ON Fan</button>
+            <button class="btn-off" onclick="sendCommand('fan1', 'OFF')">Turn OFF Fan</button>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <p>Device: <strong>light1</strong></p>
+            <button class="btn-on" onclick="sendCommand('light1', 'ON')">Turn ON Light</button>
+            <button class="btn-off" onclick="sendCommand('light1', 'OFF')">Turn OFF Light</button>
+        </div>
+
         <div class="log-container">
-            <strong>Status Feed:</strong>
-            <div class="log" id="statusLog">Waiting for status...</div>
+            <strong>Global Event Feed:</strong>
+            <div class="log" id="statusLog">Waiting for connection...</div>
         </div>
     </div>
 
     <script>
-        // Connect to the Python ws_bridge
+        // Prompt for username identification upon landing
+        let username = prompt("Enter your username to manage devices:", "Guest" + Math.floor(Math.random() * 1000));
+        if (!username) username = "Anonymous";
+        document.getElementById("userDisplay").innerText = username;
+
         let ws = new WebSocket("ws://localhost:8765");
 
         ws.onmessage = function (event) {
             let logDiv = document.getElementById("statusLog");
-            logDiv.innerText = event.data + "\n" + logDiv.innerText;
+            let txt = `[${new Date().toLocaleTimeString()}] ` + event.data;
+            logDiv.innerText = txt + "\n" + logDiv.innerText;
         };
 
         ws.onopen = function () {
-            document.getElementById("statusLog").innerText = "WebSocket bridge connected.\n";
+            document.getElementById("statusLog").innerText = "Successfully connected to WebSocket hub.\n";
         };
 
-        function sendCommand(action) {
-            // Expected format: CMD:<device_id>:<action>
-            ws.send("CMD:fan1:" + action);
+        function sendCommand(device_id, action) {
+            // Updated Format matching the backend: CMD:<username>:<device_id>:<action>
+            ws.send("CMD:" + username + ":" + device_id + ":" + action);
         }
     </script>
 
