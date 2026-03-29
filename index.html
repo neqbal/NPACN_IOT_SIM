@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Smart Home Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .device-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+            border: 1px solid #888;
+        }
+
+        .log-container {
+            margin-top: 15px;
+        }
+
+        .log {
+            color: #555;
+            white-space: pre-wrap;
+            background: #f9f9f9;
+            padding: 10px;
+            height: 150px;
+            overflow-y: scroll;
+            border: 1px inset #ccc;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="device-card">
+        <h2>Smart Home Control</h2>
+        <p>Device: <strong>fan1</strong></p>
+        <button onclick="sendCommand('ON')">Turn ON Fan</button>
+        <button onclick="sendCommand('OFF')">Turn OFF Fan</button>
+        <div class="log-container">
+            <strong>Status Feed:</strong>
+            <div class="log" id="statusLog">Waiting for status...</div>
+        </div>
+    </div>
+
+    <script>
+        // Connect to the Python ws_bridge
+        let ws = new WebSocket("ws://localhost:8765");
+
+        ws.onmessage = function (event) {
+            let logDiv = document.getElementById("statusLog");
+            logDiv.innerText = event.data + "\n" + logDiv.innerText;
+        };
+
+        ws.onopen = function () {
+            document.getElementById("statusLog").innerText = "WebSocket bridge connected.\n";
+        };
+
+        function sendCommand(action) {
+            // Expected format: CMD:<device_id>:<action>
+            ws.send("CMD:fan1:" + action);
+        }
+    </script>
+
+</body>
+
+</html>
