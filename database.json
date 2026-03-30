@@ -1,0 +1,356 @@
+{
+    "users": {
+        "admin": "password123",
+        "guest": "guestpass"
+    },
+    "devices": {
+        "fan1": "OFF",
+        "light1": "OFF"
+    },
+    "logs": [
+        {
+            "timestamp": "2026-03-30T08:21:41.566413",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:21:43.635266",
+            "event": "User admin logged in"
+        },
+        {
+            "timestamp": "2026-03-30T08:21:43.635528",
+            "event": "User admin commanded fan1 to turn ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:21:43.635909",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:21:43.636463",
+            "event": "User admin disconnected"
+        },
+        {
+            "timestamp": "2026-03-30T08:23:42.801882",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:23:46.660982",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:23:47.802046",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:23:51.661160",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:23:52.802169",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:23:56.661320",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:23:57.802384",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:01.661456",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:02.802498",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:06.661651",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:07.802576",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:11.661785",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:12.802748",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:16.661986",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:17.802866",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:21.662048",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:22.802943",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:26.662173",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:27.803180",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:31.662456",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:32.803342",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:36.663065",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:37.803500",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:41.662776",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:42.803604",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:46.662825",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:47.803776",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:51.663059",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:52.803996",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:56.663152",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:24:57.804093",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:01.234159",
+            "event": "User admin logged in"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:01.663296",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:02.804161",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:06.663832",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:06.667972",
+            "event": "User admin commanded fan1 to turn ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:06.709791",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:07.804355",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:11.663894",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:12.804554",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:16.664150",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:17.804607",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:21.664241",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:22.804766",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:26.664508",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:27.804859",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:31.664740",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:32.805312",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:36.664847",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:37.805442",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:41.665488",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:42.805527",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:46.665703",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:47.805747",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:51.666120",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:52.805836",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:56.666403",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:25:57.806019",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:01.666660",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:02.806099",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:06.667246",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:07.806295",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:11.667944",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:12.806467",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:16.668222",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:17.806562",
+            "event": "Device fan1 changed status to ON"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:17.994728",
+            "event": "User admin commanded light1 to turn OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:17.995465",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:19.995952",
+            "event": "User admin commanded fan1 to turn OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:19.997174",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:21.668029",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:22.806738",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:26.668194",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:27.806889",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:31.668414",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:32.807019",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:36.668586",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:37.807269",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:41.668689",
+            "event": "Device light1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:42.807370",
+            "event": "Device fan1 changed status to OFF"
+        },
+        {
+            "timestamp": "2026-03-30T08:26:44.319432",
+            "event": "User admin disconnected"
+        }
+    ]
+}

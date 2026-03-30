@@ -1,0 +1,6 @@
+Sending AUTH...
+Auth Response: AUTH_SUCCESS:Welcome admin
+Sending CMD...
+Received: SYS:User admin commanded fan1 to ON
+Received: STATUS:fan1:ON
+SUCCESS!

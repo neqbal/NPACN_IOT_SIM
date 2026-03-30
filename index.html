@@ -85,23 +85,34 @@
 
     <script>
         // Prompt for username identification upon landing
-        let username = prompt("Enter your username to manage devices:", "Guest" + Math.floor(Math.random() * 1000));
+        let username = prompt("Enter your username to manage devices:", "admin");
+        let password = prompt("Enter your password:", "password123");
         if (!username) username = "Anonymous";
         document.getElementById("userDisplay").innerText = username;
 
-        let ws = new WebSocket("ws://localhost:8765");
+        let ws = new WebSocket("wss://localhost:8765");
+        let isAuthenticated = false;
 
         ws.onmessage = function (event) {
             let logDiv = document.getElementById("statusLog");
             let txt = `[${new Date().toLocaleTimeString()}] ` + event.data;
             logDiv.innerText = txt + "\n" + logDiv.innerText;
+
+            if (event.data.startsWith("AUTH_SUCCESS")) {
+                isAuthenticated = true;
+            }
         };
 
         ws.onopen = function () {
             document.getElementById("statusLog").innerText = "Successfully connected to WebSocket hub.\n";
+            ws.send("AUTH:" + username + ":" + password);
         };
 
         function sendCommand(device_id, action) {
+            if (!isAuthenticated) {
+                alert("Not authenticated! Please refresh to login.");
+                return;
+            }
             // Updated Format matching the backend: CMD:<username>:<device_id>:<action>
             ws.send("CMD:" + username + ":" + device_id + ":" + action);
         }
