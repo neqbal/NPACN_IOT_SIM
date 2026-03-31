@@ -1,51 +1,57 @@
 # Simple IoT Smart Home Controller
 
-This is a minimal, framework-less, and DB-free IoT architecture implementation. It demonstrates fundamental socket programming, `epoll` concurrency handling for multiple TCP connections, and basic system routing capabilities.
+This is a complete IoT architecture implementation developed to fulfill your exact assignment requirements. It demonstrates fundamental socket programming, `epoll` concurrency, database state persistence, and Secure WebSockets (WSS).
 
 ## Code Components
-1. **`server.c`**: The central backend server built using vanilla C sockets and `epoll` for non-blocking I/O routing.
-2. **`ws_bridge.py`**: A python script that seamlessly translates WebSocket traffic (`ws://`) to Raw TCP packets to interface with the C server.
-3. **`device.py`**: A simulated IoT device acting as a TCP client responding to `CMD` tokens and publishing `STATUS` tokens.
-4. **`index.html`**: The UI interface with vanilla JavaScript WebSockets capable of managing devices manually.
-
-## Prerequisites
-- C Compiler (`gcc`)
-- Python 3
-- The `websockets` package for the python bridge (`pip install websockets`)
+1. **`server.c`**: Core TCP server using `epoll` for non-blocking I/O routing. It features robust buffers for handling incomplete fragmented reads and utilizes the `TCP_NODELAY` socket option for zero-latency commands.
+2. **`ws_bridge.py`**: Python script bridging secure WebSocket connections (`wss://`) to raw TCP. It securely translates traffic and natively manages the JSON database.
+3. **`database.json`**: Auto-generated local DB storing user credentials, physical device states, and global timestamped activity logs.
+4. **`cert.pem` / `key.pem`**: Self-signed OpenSSL certificates generated strictly to facilitate `wss://` encrypted communication.
+5. **`device.py`**: A simulated physical IoT device node that issues periodic `STATUS` ticks and updates in real-time.
+6. **`index.html`**: The UI interface with vanilla JavaScript WebSockets, featuring a mandatory credential login step preventing unauthorized access.
+7. **`test_sys.py`**: Automated end-to-end integration test confirming auth headers.
 
 ## Steps to Compile and Run
 
 Open up 4 distinct terminal instances to observe the live interactions between all system layers:
 
 ### 1. Start the C Server
-Establish the core logic hub on `localhost:9000`.
+Establish the core logic hub on `localhost:9000`. This will route all IoT activity using non-blocking epoll sockets.
 ```bash
 gcc server.c -o server
 ./server
 ```
 
-### 2. Start the WebSocket Bridge
-In the second terminal, spin up the translation layer to accept `ws://localhost:8765` incoming clients.
+### 2. Start the Secure WebSocket Bridge
+In the second terminal, spin up the translation layer. It will launch an encrypted SSL instance on port 8765.
 ```bash
 python ws_bridge.py
 ```
 
 ### 3. Spin up the Device Simulator
-In the third terminal, initiate your target IoT node. It will handshake and periodically publish its state.
+In the third terminal, initiate your target IoT node. It will handshake and routinely broadcast `STATUS:fan1:OFF`.
 ```bash
 python device.py
 ```
 
-### 4. Access the Web UI
-Open the interface directly via your browser. You can usually double-click the `index.html` file in your local file explorer, or serve it:
-```bash
-python -m http.server 8080
-```
-Then connect via `http://localhost:8080/index.html`. 
+### 4. Trust the SSL Certificate (CRITICAL STEP)
+Since we generated our own private SSL certificates, modern browsers will block the WebSocket connection initially because no official CA signed it! You must proactively allow it:
+1. Open your browser and navigate directly to: `https://localhost:8765`
+2. You will get a warning stating **"Your connection is not private."**
+3. Click "Advanced" / "More Info" and select **"Proceed to localhost (unsafe)"**.
+4. You should see a blank screen that says "Upgrade to WebSockets required." You can now close this tab!
 
-You can click **Turn ON Fan** or **Turn OFF Fan**. When you do:
-1. The JS script fires `CMD:fan1:ON` through the WebSocket...
-2. `ws_bridge.py` intercepts it and passes it as raw TCP to `server.c`...
-3. `server.c` correctly iterates its mapped dictionary of clients and routes the string straight to the `device.py` socket...
-4. `device.py` flips its internal state from `OFF` to `ON` and shouts back `STATUS:fan1:ON`...
-5. Which the server then broadcasts backwards all the way to your browser UI!
+### 5. Access the Web UI
+Now you can safely open the interface. Instead of serving it, you can normally just double-click `index.html` in your file explorer.
+1. When prompted for credentials, use the default DB login:
+   - **Username**: `admin`
+   - **Password**: `password123`
+2. Once connected, click **Turn ON Fan**.
+
+### Observing the Result
+When you click **Turn ON Fan**:
+1. `index.html` transmits your encrypted auth and command across `wss://` to `ws_bridge.py`.
+2. The python bridge validates `admin:password123` against `database.json`.
+3. If valid, the bridge relays it over raw TCP to the C backend.
+4. `server.c` buffers the byte-stream until it identifies the `\n` message break, then strictly forwards the route to `device.py` (which immediately flips to `STATUS:fan1:ON`).
+5. A system-wide log of your actions is permanently appended to `database.json`!
